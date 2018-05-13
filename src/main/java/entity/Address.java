@@ -13,6 +13,14 @@ public class Address {
     public Address() {
     }
 
+    public Address(Long id, String country, String city, String street, String postCode) {
+        Id = id;
+        this.country = country;
+        this.city = city;
+        this.street = street;
+        this.postCode = postCode;
+    }
+
     public Long getId() {
         return Id;
     }

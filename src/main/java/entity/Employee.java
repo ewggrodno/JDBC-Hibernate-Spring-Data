@@ -14,6 +14,14 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(Long id, String firstNme, String lastName, Date birthday, Long addressId) {
+        this.id = id;
+        this.firstNme = firstNme;
+        this.lastName = lastName;
+        this.birthday = birthday;
+        this.addressId = addressId;
+    }
+
     public Long getId() {
         return id;
     }
