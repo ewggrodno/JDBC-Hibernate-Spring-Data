@@ -29,6 +29,14 @@
             <version>1.4.197</version>
             <scope>H2 - myTest</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
     

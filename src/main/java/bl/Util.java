@@ -10,7 +10,7 @@ public class Util {
     private static final String DB_USERNAME = "ewgen";
     private static final String DB_PASSWORD = "Alinochka2010";
 
-    public static Connection getConnection(){
+    public static Connection getConnection() {
         Connection connection = null;
         try {
             Class.forName(DB_DRIVER);
@@ -27,38 +27,53 @@ public class Util {
         clearAllTables();
     }
 
-    public static void clearAllTables(){
-        Connection connection = getConnection();
-        System.out.println("Очистка БД");
-
-        String ADDRESS = "DELETE FROM ADDRESS";
-        String EMPLOYEE = "DELETE FROM EMPLOYEE";
-        String PROJECT = "DELETE FROM PROJECT";
-        String EMPL_PROJ = "DELETE FROM EMPL_PROJ";
-
-        try {
-            System.out.printf("Удаляем все: %s\n", EMPL_PROJ);
-            PreparedStatement preparedStatement = connection.prepareStatement(EMPL_PROJ);
-            preparedStatement.executeUpdate();
-
-            System.out.printf("Удаляем все: %s\n", PROJECT);
-            preparedStatement = connection.prepareStatement(PROJECT);
-            preparedStatement.executeUpdate();
-
-            System.out.printf("Удаляем все: %s\n", EMPLOYEE);
-            preparedStatement = connection.prepareStatement(EMPLOYEE);
-            preparedStatement.executeUpdate();
-
-            System.out.printf("Удаляем все: %s\n", ADDRESS);
-            preparedStatement = connection.prepareStatement(ADDRESS);
-            preparedStatement.executeUpdate();
-
-            preparedStatement.close();
-            connection.close();
-            System.out.println("Очистка БД - OK!");
+    public static void clearAllTables() {
+        try (Connection connection = Util.getConnection()){
+            System.out.println("Start clearing Database");
+            clearTableEmplProj(connection);
+            clearTableProject(connection);
+            clearTableEmployee(connection);
+            clearTableAddress(connection);
+            System.out.println("Finish clearing Database");
         } catch (SQLException e) {
-            System.out.println("Очистка БД - ERROR!");
+            System.out.println("Clearing Database: ERROR");
             e.printStackTrace();
         }
+    }
+
+    private static void clearTableEmplProj(Connection connection) throws SQLException {
+        String sql = "DELETE FROM EMPL_PROJ";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        System.out.println("Clear table: EMPL_PROJ - OK!");
+    }
+
+    private static void clearTableProject(Connection connection) throws SQLException {
+        String sql = "DELETE FROM PROJECT";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        System.out.println("Clear table: PROJECT - OK!");
+    }
+
+    private static void clearTableEmployee(Connection connection) throws SQLException {
+        String sql = "DELETE FROM EMPLOYEE";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        System.out.println("Clear table: EMPLOYEE - OK!");
+    }
+
+    private static void clearTableAddress(Connection connection) throws SQLException {
+        String sql = "DELETE FROM ADDRESS";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        System.out.println("Clear table: ADDRESS - OK!");
     }
 }
