@@ -23,10 +23,8 @@ public class AddressService implements AddressDAO {
                 "INSERT INTO ADDRESS (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, address.getId());
             preparedStatement.setString(2, address.getCountry());
@@ -37,21 +35,6 @@ public class AddressService implements AddressDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -62,14 +45,12 @@ public class AddressService implements AddressDAO {
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         List<Address> addressList = new ArrayList<>();
-        Connection connection = Util.getConnection();
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement()){
 
             ResultSet resultSet = statement.executeQuery(sql);
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 Address address = new Address();
 
                 address.setId(resultSet.getLong(ID));
@@ -82,21 +63,6 @@ public class AddressService implements AddressDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return addressList;
     }
@@ -108,11 +74,8 @@ public class AddressService implements AddressDAO {
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         Address address = new Address();
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, id);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
@@ -124,21 +87,6 @@ public class AddressService implements AddressDAO {
             address.setPostCode(resultSet.getString(POST_CODE));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return address;
     }
@@ -149,10 +97,8 @@ public class AddressService implements AddressDAO {
                 "UPDATE ADDRESS SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 COUNTRY, CITY, STREET, POST_CODE, ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setString(1, address.getCountry());
             preparedStatement.setString(2, address.getCity());
@@ -163,21 +109,6 @@ public class AddressService implements AddressDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -187,31 +118,14 @@ public class AddressService implements AddressDAO {
                 "DELETE FROM ADDRESS WHERE %s=?",
                 ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
-            preparedStatement.setLong(1 , address.getId());
+            preparedStatement.setLong(1, address.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

@@ -20,15 +20,14 @@ public class Util {
             System.out.println("Connection: ERROR!");
             e.printStackTrace();
         }
-
         return connection;
     }
 
     public static void main(String[] args) {
-        deleteAllTables();
+        clearAllTables();
     }
 
-    public static void deleteAllTables(){
+    public static void clearAllTables(){
         Connection connection = getConnection();
         System.out.println("Очистка БД");
 
@@ -38,10 +37,6 @@ public class Util {
         String EMPL_PROJ = "DELETE FROM EMPL_PROJ";
 
         try {
-
-
-
-
             System.out.printf("Удаляем все: %s\n", EMPL_PROJ);
             PreparedStatement preparedStatement = connection.prepareStatement(EMPL_PROJ);
             preparedStatement.executeUpdate();

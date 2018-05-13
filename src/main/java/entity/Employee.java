@@ -5,16 +5,16 @@ import java.util.Objects;
 
 public class Employee {
 
-    private Long id;
+    private long id;
     private String firstNme;
     private String lastName;
     private Date birthday;
-    private Long addressId;
+    private long addressId;
 
     public Employee() {
     }
 
-    public Employee(Long id, String firstNme, String lastName, Date birthday, Long addressId) {
+    public Employee(long id, String firstNme, String lastName, Date birthday, long addressId) {
         this.id = id;
         this.firstNme = firstNme;
         this.lastName = lastName;
@@ -26,7 +26,7 @@ public class Employee {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -58,7 +58,7 @@ public class Employee {
         return addressId;
     }
 
-    public void setAddressId(Long addressId) {
+    public void setAddressId(long addressId) {
         this.addressId = addressId;
     }
 

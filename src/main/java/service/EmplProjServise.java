@@ -19,10 +19,8 @@ public class EmplProjServise implements EmplProjDAO {
                 "INSERT INTO EMPL_PROJ (%s, %s) VALUES(?, ?)",
                 EMPLOYEE_ID, PROJECT_ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());
@@ -30,21 +28,6 @@ public class EmplProjServise implements EmplProjDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -55,10 +38,8 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID);
 
         List<EmplProj> emplProjList = new ArrayList<>();
-        Connection connection = Util.getConnection();
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement()){
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -72,21 +53,6 @@ public class EmplProjServise implements EmplProjDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return emplProjList;
     }
@@ -98,10 +64,9 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         EmplProj emplProj = null;
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
             preparedStatement.setLong(1, employeeId);
             preparedStatement.setLong(2, projectId);
 
@@ -113,21 +78,6 @@ public class EmplProjServise implements EmplProjDAO {
             emplProj.setProjectId(resultSet.getLong(PROJECT_ID));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return emplProj;
     }
@@ -138,31 +88,15 @@ public class EmplProjServise implements EmplProjDAO {
                 "UPDATE EMPL_PROJ SET %s=?, %s=?",
                 EMPLOYEE_ID, PROJECT_ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(1, emplProj.getProjectId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -172,10 +106,8 @@ public class EmplProjServise implements EmplProjDAO {
                 "DELETE FROM EMPL_PROJ WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());
@@ -183,21 +115,6 @@ public class EmplProjServise implements EmplProjDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null){
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

@@ -21,10 +21,8 @@ public class EmployeeService implements EmployeeDAO {
         String sql = String.format("INSERT INTO EMPLOYEE (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setLong(1, employee.getId());
             preparedStatement.setString(2, employee.getFirstNme());
@@ -35,21 +33,6 @@ public class EmployeeService implements EmployeeDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -59,10 +42,8 @@ public class EmployeeService implements EmployeeDAO {
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         List<Employee> employeeList = new ArrayList<>();
-        Connection connection = Util.getConnection();
-        Statement statement = null;
-        try {
-            statement = connection.createStatement();
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement()){
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -79,24 +60,7 @@ public class EmployeeService implements EmployeeDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (statement != null) {
-                try {
-                    statement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
-
         return employeeList;
     }
 
@@ -107,10 +71,8 @@ public class EmployeeService implements EmployeeDAO {
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         Employee employee = new Employee();
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -123,21 +85,6 @@ public class EmployeeService implements EmployeeDAO {
             employee.setAddressId(resultSet.getLong(ADDRESS_ID));
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null) {
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return employee;
     }
@@ -148,10 +95,8 @@ public class EmployeeService implements EmployeeDAO {
                 "UPDATE EMPLOYEE SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID, ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setString(1, employee.getFirstNme());
             preparedStatement.setString(2, employee.getLastName());
@@ -162,21 +107,6 @@ public class EmployeeService implements EmployeeDAO {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null){
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
@@ -184,31 +114,14 @@ public class EmployeeService implements EmployeeDAO {
     public void remove(Employee employee) {
         String sql = String.format("DELETE FROM EMPLOYEE WHERE %s=?", ID);
 
-        Connection connection = Util.getConnection();
-        PreparedStatement preparedStatement = null;
-        try {
-            preparedStatement = connection.prepareStatement(sql);
+        try (Connection connection = Util.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
             preparedStatement.setLong(1, employee.getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            if (preparedStatement != null){
-                try {
-                    preparedStatement.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (connection != null){
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 }

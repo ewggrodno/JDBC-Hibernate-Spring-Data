@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public class Project {
 
-    private Long id;
+    private long id;
     private String title;
 
     public Project() {
     }
 
-    public Project(Long id, String title) {
+    public Project(long id, String title) {
         this.id = id;
         this.title = title;
     }
@@ -19,7 +19,7 @@ public class Project {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

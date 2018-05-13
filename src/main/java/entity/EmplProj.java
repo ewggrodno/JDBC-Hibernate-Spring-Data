@@ -4,30 +4,30 @@ import java.util.Objects;
 
 public class EmplProj {
 
-    private Long employeeId;
-    private Long projectId;
+    private long employeeId;
+    private long projectId;
 
     public EmplProj() {
     }
 
-    public EmplProj(Long employeeId, Long projectId) {
+    public EmplProj(long employeeId, long projectId) {
         this.employeeId = employeeId;
         this.projectId = projectId;
     }
 
-    public Long getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(Long employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 
-    public Long getProjectId() {
+    public long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Long projectId) {
+    public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
 
