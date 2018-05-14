@@ -10,13 +10,13 @@ import java.util.List;
 
 public class EmplProjServise implements EmplProjDAO {
 
-    private String EMPLOYEE_ID = "EMPLOYEE_ID";
-    private String PROJECT_ID = "PROJECT_ID";
+    private String EMPLOYEE_ID = "employee_id";
+    private String PROJECT_ID = "project_id";
 
     @Override
     public void add(EmplProj emplProj) {
         String sql = String.format(
-                "INSERT INTO EMPL_PROJ (%s, %s) VALUES(?, ?)",
+                "INSERT INTO empl_proj (%s, %s) VALUES(?, ?)",
                 EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
@@ -34,7 +34,7 @@ public class EmplProjServise implements EmplProjDAO {
     @Override
     public List<EmplProj> getAll() {
         String sql = String.format(
-                "SELECT %s, %s FROM EMPL_PROJ",
+                "SELECT %s, %s FROM empl_proj",
                 EMPLOYEE_ID, PROJECT_ID);
 
         List<EmplProj> emplProjList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class EmplProjServise implements EmplProjDAO {
     @Override
     public EmplProj getByEmployeeIdAndProjectId(long employeeId, long projectId) {
         String sql = String.format(
-                "SELECT %s, %s FROM EMPL_PROJ WHERE %s=? AND %s=?",
+                "SELECT %s, %s FROM empl_proj WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         EmplProj emplProj = null;
@@ -85,7 +85,7 @@ public class EmplProjServise implements EmplProjDAO {
     @Override
     public void update(EmplProj oldEmplProj, EmplProj newEmplProj) {
         String sql = String.format(
-                "UPDATE EMPL_PROJ SET %s=?, %s=? WHERE %s=? AND %s=?",
+                "UPDATE empl_proj SET %s=?, %s=? WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
@@ -96,9 +96,6 @@ public class EmplProjServise implements EmplProjDAO {
             preparedStatement.setLong(3 , oldEmplProj.getEmployeeId());
             preparedStatement.setLong(4 , oldEmplProj.getProjectId());
 
-//            preparedStatement.setLong(1, emplProj.getEmployeeId());
-//            preparedStatement.setLong(1, emplProj.getProjectId());
-
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,7 +105,7 @@ public class EmplProjServise implements EmplProjDAO {
     @Override
     public void remove(EmplProj emplProj) {
         String sql = String.format(
-                "DELETE FROM EMPL_PROJ WHERE %s=? AND %s=?",
+                "DELETE FROM empl_proj WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();

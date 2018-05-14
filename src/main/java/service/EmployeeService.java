@@ -9,15 +9,15 @@ import java.util.*;
 
 public class EmployeeService implements EmployeeDAO {
 
-    private String ID = "ID";
-    private String FIRST_NAME = "FIRST_NAME";
-    private String LAST_NAME = "LAST_NAME";
-    private String BIRTHDAY = "BIRTHDAY";
-    private String ADDRESS_ID = "ADDRESS_ID";
+    private String ID = "id";
+    private String FIRST_NAME = "first_name";
+    private String LAST_NAME = "last_name";
+    private String BIRTHDAY = "birthday";
+    private String ADDRESS_ID = "address_id";
 
     @Override
     public void add(Employee employee) {
-        String sql = String.format("INSERT INTO EMPLOYEE (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
+        String sql = String.format("INSERT INTO employee (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         try (Connection connection = Util.getConnection();
@@ -37,7 +37,7 @@ public class EmployeeService implements EmployeeDAO {
 
     @Override
     public List<Employee> getAll() {
-        String sql = String.format("SELECT %s, %s, %s, %s, %s FROM EMPLOYEE",
+        String sql = String.format("SELECT %s, %s, %s, %s, %s FROM employee",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         List<Employee> employeeList = new ArrayList<>();
@@ -66,7 +66,7 @@ public class EmployeeService implements EmployeeDAO {
     @Override
     public Employee getById(long id) {
         String sql = String.format(
-                "SELECT %s, %s, %s, %s, %s FROM EMPLOYEE WHERE ID=?",
+                "SELECT %s, %s, %s, %s, %s FROM employee WHERE ID=?",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         Employee employee = new Employee();
@@ -91,7 +91,7 @@ public class EmployeeService implements EmployeeDAO {
     @Override
     public void update(Employee employee) {
         String sql = String.format(
-                "UPDATE EMPLOYEE SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                "UPDATE employee SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID, ID);
 
         try (Connection connection = Util.getConnection();
@@ -111,7 +111,7 @@ public class EmployeeService implements EmployeeDAO {
 
     @Override
     public void remove(Employee employee) {
-        String sql = String.format("DELETE FROM EMPLOYEE WHERE %s=?", ID);
+        String sql = String.format("DELETE FROM employee WHERE %s=?", ID);
 
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){

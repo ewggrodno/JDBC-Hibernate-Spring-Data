@@ -10,13 +10,13 @@ import java.util.List;
 
 public class ProjectService implements ProjectDAO {
 
-    private static final String ID = "ID";
-    private static final String TITLE = "TITLE";
+    private static final String ID = "id";
+    private static final String TITLE = "title";
 
     @Override
     public void add(Project project) {
         String sql = String.format(
-                "INSERT INTO PROJECT (%s, %s) VALUES(?, ?)",
+                "INSERT INTO project (%s, %s) VALUES(?, ?)",
                 ID, TITLE);
 
         try (Connection connection = Util.getConnection();
@@ -34,7 +34,7 @@ public class ProjectService implements ProjectDAO {
     @Override
     public List<Project> getAll() {
         String sql = String.format(
-                "SELECT %s, %s FROM PROJECT",
+                "SELECT %s, %s FROM project",
                 ID, TITLE);
 
         List<Project> projectList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class ProjectService implements ProjectDAO {
 
     @Override
     public Project getById(long id) {
-        String sql = String.format("SELECT %s, %s FROM PROJECT WHERE ID=?",
+        String sql = String.format("SELECT %s, %s FROM project WHERE ID=?",
                 ID, TITLE);
 
         Project project = null;
@@ -81,7 +81,7 @@ public class ProjectService implements ProjectDAO {
 
     @Override
     public void update(Project project) {
-        String sqj = String.format("UPDATE PROJECT SET %s=? WHERE %s=?",
+        String sqj = String.format("UPDATE project SET %s=? WHERE %s=?",
                 TITLE, ID);
 
         try (Connection connection = Util.getConnection();
@@ -98,7 +98,7 @@ public class ProjectService implements ProjectDAO {
 
     @Override
     public void remove(Project project) {
-        String sql = String.format("DELETE FROM PROJECT WHERE %s=?", ID);
+        String sql = String.format("DELETE FROM project WHERE %s=?", ID);
 
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){

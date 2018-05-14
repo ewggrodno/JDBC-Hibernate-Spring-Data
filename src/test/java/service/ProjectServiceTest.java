@@ -10,26 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static testData.ProjectData.*;
 
 public class ProjectServiceTest {
 
     private ProjectService projectService = new ProjectService();
 
-    private Project project1 = null;
-    private Project project2 = null;
-    private Project project3 = null;
-
     @Before
     public void setUp() throws Exception {
         Util.clearAllTables();
 
-        project1 = new Project(1, "Title 1");
-        project2 = new Project(2, "Title 2");
-        project3 = new Project(3, "Title 3");
-
-        projectService.add(project1);
-        projectService.add(project2);
-        projectService.add(project3);
+        projectService.add(PROJECT_1);
+        projectService.add(PROJECT_2);
+        projectService.add(PROJECT_3);
     }
 
     @After
@@ -41,14 +34,14 @@ public class ProjectServiceTest {
     public void add_PROJECT() {
         Util.clearAllTables();
 
-        projectService.add(project1);
-        projectService.add(project2);
-        projectService.add(project3);
+        projectService.add(PROJECT_1);
+        projectService.add(PROJECT_2);
+        projectService.add(PROJECT_3);
 
         List<Project> expected = new ArrayList<>();
-        expected.add(project1);
-        expected.add(project2);
-        expected.add(project3);
+        expected.add(PROJECT_1);
+        expected.add(PROJECT_2);
+        expected.add(PROJECT_3);
 
         List<Project> actual = projectService.getAll();
 
@@ -58,9 +51,9 @@ public class ProjectServiceTest {
     @Test
     public void getAll_PROJECT() {
         List<Project> expected = new ArrayList<>();
-        expected.add(project1);
-        expected.add(project2);
-        expected.add(project3);
+        expected.add(PROJECT_1);
+        expected.add(PROJECT_2);
+        expected.add(PROJECT_3);
 
         List<Project> actual = projectService.getAll();
 
@@ -73,16 +66,16 @@ public class ProjectServiceTest {
         Project actual2 = projectService.getById(2);
         Project actual3 = projectService.getById(3);
 
-        assertEquals(project1, actual1);
-        assertEquals(project2, actual2);
-        assertEquals(project3, actual3);
+        assertEquals(PROJECT_1, actual1);
+        assertEquals(PROJECT_2, actual2);
+        assertEquals(PROJECT_3, actual3);
     }
 
     @Test
     public void update_PROJECT() {
-        project1 = new Project(1, "updateTitle 1");
-        project2 = new Project(2, "updateTitle 2");
-        project3 = new Project(3, "updateTitle 3");
+        Project project1 = new Project(1, "updateTitle 1");
+        Project project2 = new Project(2, "updateTitle 2");
+        Project project3 = new Project(3, "updateTitle 3");
 
         projectService.update(project1);
         projectService.update(project2);
@@ -99,11 +92,11 @@ public class ProjectServiceTest {
 
     @Test
     public void remove_PROJECT() {
-        projectService.remove(project1);
+        projectService.remove(PROJECT_1);
 
         List<Project> expected = new ArrayList<>();
-        expected.add(project2);
-        expected.add(project3);
+        expected.add(PROJECT_2);
+        expected.add(PROJECT_3);
 
         List<Project> actual = projectService.getAll();
 

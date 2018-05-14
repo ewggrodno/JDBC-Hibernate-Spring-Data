@@ -11,16 +11,16 @@ import java.util.Map;
 
 public class AddressService implements AddressDAO {
 
-    private static final String ID = "ID";
-    private static final String COUNTRY = "COUNTRY";
-    private static final String CITY = "CITY";
-    private static final String STREET = "STREET";
-    private static final String POST_CODE = "POST_CODE";
+    private static final String ID = "id";
+    private static final String COUNTRY = "country";
+    private static final String CITY = "city";
+    private static final String STREET = "street";
+    private static final String POST_CODE = "post_code";
 
     @Override
     public void add(Address address) {
         String sql = String.format(
-                "INSERT INTO ADDRESS (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
+                "INSERT INTO address (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         try (Connection connection = Util.getConnection();
@@ -41,7 +41,7 @@ public class AddressService implements AddressDAO {
     @Override
     public List<Address> getAll() {
         String sql = String.format(
-                "SELECT %s, %s, %s, %s, %s FROM ADDRESS",
+                "SELECT %s, %s, %s, %s, %s FROM address",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         List<Address> addressList = new ArrayList<>();
@@ -70,7 +70,7 @@ public class AddressService implements AddressDAO {
     @Override
     public Address getById(long id) {
         String sql = String.format(
-                "SELECT %s, %s, %s, %s, %s FROM ADDRESS WHERE ID=?",
+                "SELECT %s, %s, %s, %s, %s FROM address WHERE ID=?",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         Address address = new Address();
@@ -95,7 +95,7 @@ public class AddressService implements AddressDAO {
     @Override
     public void update(Address address) {
         String sql = String.format(
-                "UPDATE ADDRESS SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
+                "UPDATE address SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 COUNTRY, CITY, STREET, POST_CODE, ID);
 
         try (Connection connection = Util.getConnection();
@@ -116,7 +116,7 @@ public class AddressService implements AddressDAO {
     @Override
     public void remove(Address address) {
         String sql = String.format(
-                "DELETE FROM ADDRESS WHERE %s=?",
+                "DELETE FROM address WHERE %s=?",
                 ID);
 
         try (Connection connection = Util.getConnection();

@@ -30,10 +30,10 @@ public class Util {
     public static void clearAllTables() {
         try (Connection connection = Util.getConnection()){
             System.out.println("Start clearing Database");
-            clearTableEmplProj(connection);
-            clearTableProject(connection);
-            clearTableEmployee(connection);
-            clearTableAddress(connection);
+            clearTable(connection, "empl_proj");
+            clearTable(connection, "project");
+            clearTable(connection, "employee");
+            clearTable(connection, "address");
             System.out.println("Finish clearing Database");
         } catch (SQLException e) {
             System.out.println("Clearing Database: ERROR");
@@ -41,39 +41,13 @@ public class Util {
         }
     }
 
-    private static void clearTableEmplProj(Connection connection) throws SQLException {
-        String sql = "DELETE FROM EMPL_PROJ";
+    private static void clearTable(Connection connection, String nameTable) throws SQLException {
+        String sql = String.format("DELETE FROM %s", nameTable);
 
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.executeUpdate();
         preparedStatement.close();
-        System.out.println("Clear table: EMPL_PROJ - OK!");
+        System.out.printf("Clear table: %s - OK!\n", nameTable);
     }
 
-    private static void clearTableProject(Connection connection) throws SQLException {
-        String sql = "DELETE FROM PROJECT";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate();
-        preparedStatement.close();
-        System.out.println("Clear table: PROJECT - OK!");
-    }
-
-    private static void clearTableEmployee(Connection connection) throws SQLException {
-        String sql = "DELETE FROM EMPLOYEE";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate();
-        preparedStatement.close();
-        System.out.println("Clear table: EMPLOYEE - OK!");
-    }
-
-    private static void clearTableAddress(Connection connection) throws SQLException {
-        String sql = "DELETE FROM ADDRESS";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.executeUpdate();
-        preparedStatement.close();
-        System.out.println("Clear table: ADDRESS - OK!");
-    }
 }
