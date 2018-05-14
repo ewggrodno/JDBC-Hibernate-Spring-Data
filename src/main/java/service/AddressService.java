@@ -68,7 +68,7 @@ public class AddressService implements AddressDAO {
     }
 
     @Override
-    public Address getById(Long id) {
+    public Address getById(long id) {
         String sql = String.format(
                 "SELECT %s, %s, %s, %s, %s FROM ADDRESS WHERE ID=?",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
@@ -76,6 +76,7 @@ public class AddressService implements AddressDAO {
         Address address = new Address();
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();

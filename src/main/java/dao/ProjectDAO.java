@@ -12,7 +12,7 @@ public interface ProjectDAO {
     //read
     List<Project> getAll();
 
-    Project getById(Long id);
+    Project getById(long id);
 
     //update
     void update(Project project);

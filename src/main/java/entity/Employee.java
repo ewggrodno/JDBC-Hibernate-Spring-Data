@@ -67,11 +67,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id) &&
+        return id == employee.id &&
+                addressId == employee.addressId &&
                 Objects.equals(firstNme, employee.firstNme) &&
                 Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(birthday, employee.birthday) &&
-                Objects.equals(addressId, employee.addressId);
+                Objects.equals(birthday.toString(), employee.birthday.toString());
     }
 
     @Override

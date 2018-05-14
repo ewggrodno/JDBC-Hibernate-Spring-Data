@@ -12,10 +12,10 @@ public interface EmplProjDAO {
     //read
     List<EmplProj> getAll();
 
-    EmplProj getByEmployeeIdAndProjectId(Long employeeId, Long projectId);
+    EmplProj getByEmployeeIdAndProjectId(long employeeId, long projectId);
 
     //update
-    void update(EmplProj emplProj);
+    void update(EmplProj oldEmplProj, EmplProj newEmplProj);
 
     //delete
     void remove(EmplProj emplProj);

@@ -20,6 +20,7 @@ public class Domain {
     private static EmplProjServise emplProjServise = new EmplProjServise();
 
     public static void main(String[] args) {
+        Util.clearAllTables();
         //test Address
         Address address1 = new Address(
                 1, "Беларусь", "Гродно", "Фолюш", "230005");
@@ -64,6 +65,8 @@ public class Domain {
 
         emplProjServise.add(emplProj1);
         emplProjServise.add(emplProj2);
+
+        System.out.println(addressService.getById(1));
 
         printAllData();
     }

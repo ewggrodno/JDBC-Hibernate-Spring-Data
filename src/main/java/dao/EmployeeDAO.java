@@ -13,7 +13,7 @@ public interface EmployeeDAO {
     //read
     List<Employee> getAll();
 
-    Employee getById(Long id);
+    Employee getById(long id);
 
     //update
     void update(Employee employee);

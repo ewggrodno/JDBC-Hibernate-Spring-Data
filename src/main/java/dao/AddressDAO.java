@@ -12,7 +12,7 @@ public interface AddressDAO {
     //read
     List<Address> getAll();
 
-    Address getById(Long id);
+    Address getById(long id);
 
     //update
     void update(Address address);

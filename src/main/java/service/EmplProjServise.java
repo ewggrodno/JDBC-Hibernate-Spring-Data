@@ -58,7 +58,7 @@ public class EmplProjServise implements EmplProjDAO {
     }
 
     @Override
-    public EmplProj getByEmployeeIdAndProjectId(Long employeeId, Long projectId) {
+    public EmplProj getByEmployeeIdAndProjectId(long employeeId, long projectId) {
         String sql = String.format(
                 "SELECT %s, %s FROM EMPL_PROJ WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
@@ -83,16 +83,21 @@ public class EmplProjServise implements EmplProjDAO {
     }
 
     @Override
-    public void update(EmplProj emplProj) {
+    public void update(EmplProj oldEmplProj, EmplProj newEmplProj) {
         String sql = String.format(
-                "UPDATE EMPL_PROJ SET %s=?, %s=?",
-                EMPLOYEE_ID, PROJECT_ID);
+                "UPDATE EMPL_PROJ SET %s=?, %s=? WHERE %s=? AND %s=?",
+                EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)){
 
-            preparedStatement.setLong(1, emplProj.getEmployeeId());
-            preparedStatement.setLong(1, emplProj.getProjectId());
+            preparedStatement.setLong(1 , newEmplProj.getEmployeeId());
+            preparedStatement.setLong(2 , newEmplProj.getProjectId());
+            preparedStatement.setLong(3 , oldEmplProj.getEmployeeId());
+            preparedStatement.setLong(4 , oldEmplProj.getProjectId());
+
+//            preparedStatement.setLong(1, emplProj.getEmployeeId());
+//            preparedStatement.setLong(1, emplProj.getProjectId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {

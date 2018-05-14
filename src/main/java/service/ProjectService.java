@@ -58,7 +58,7 @@ public class ProjectService implements ProjectDAO {
     }
 
     @Override
-    public Project getById(Long id) {
+    public Project getById(long id) {
         String sql = String.format("SELECT %s, %s FROM PROJECT WHERE ID=?",
                 ID, TITLE);
 

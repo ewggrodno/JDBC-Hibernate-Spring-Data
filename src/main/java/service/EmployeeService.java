@@ -5,8 +5,7 @@ import dao.EmployeeDAO;
 import entity.Employee;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class EmployeeService implements EmployeeDAO {
 
@@ -65,7 +64,7 @@ public class EmployeeService implements EmployeeDAO {
     }
 
     @Override
-    public Employee getById(Long id) {
+    public Employee getById(long id) {
         String sql = String.format(
                 "SELECT %s, %s, %s, %s, %s FROM EMPLOYEE WHERE ID=?",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
