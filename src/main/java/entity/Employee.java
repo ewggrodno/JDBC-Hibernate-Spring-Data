@@ -1,8 +1,11 @@
 package entity;
 
+import lombok.Data;
+
 import java.sql.Date;
 import java.util.Objects;
 
+@Data
 public class Employee {
 
     private long id;
@@ -22,46 +25,6 @@ public class Employee {
         this.addressId = addressId;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstNme() {
-        return firstNme;
-    }
-
-    public void setFirstNme(String firstNme) {
-        this.firstNme = firstNme;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Date getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
-    }
-
-    public Long getAddressId() {
-        return addressId;
-    }
-
-    public void setAddressId(long addressId) {
-        this.addressId = addressId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,20 +37,4 @@ public class Employee {
                 Objects.equals(birthday.toString(), employee.birthday.toString());
     }
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(id, firstNme, lastName, birthday, addressId);
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstNme='" + firstNme + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthday=" + birthday +
-                ", addressId=" + addressId +
-                '}';
-    }
 }
