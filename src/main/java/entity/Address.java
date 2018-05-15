@@ -1,8 +1,12 @@
 package entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Address {
 
     private long Id;
@@ -10,16 +14,5 @@ public class Address {
     private String city;
     private String street;
     private String postCode;
-
-    public Address() {
-    }
-
-    public Address(long id, String country, String city, String street, String postCode) {
-        Id = id;
-        this.country = country;
-        this.city = city;
-        this.street = street;
-        this.postCode = postCode;
-    }
 
 }

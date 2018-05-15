@@ -1,11 +1,15 @@
 package entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.Objects;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Employee {
 
     private long id;
@@ -13,17 +17,6 @@ public class Employee {
     private String lastName;
     private Date birthday;
     private long addressId;
-
-    public Employee() {
-    }
-
-    public Employee(long id, String firstNme, String lastName, Date birthday, long addressId) {
-        this.id = id;
-        this.firstNme = firstNme;
-        this.lastName = lastName;
-        this.birthday = birthday;
-        this.addressId = addressId;
-    }
 
     @Override
     public boolean equals(Object o) {
