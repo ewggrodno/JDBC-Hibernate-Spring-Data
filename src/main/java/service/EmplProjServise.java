@@ -20,7 +20,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());
@@ -39,7 +39,7 @@ public class EmplProjServise implements EmplProjDAO {
 
         List<EmplProj> emplProjList = new ArrayList<>();
         try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()){
+             Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -65,7 +65,7 @@ public class EmplProjServise implements EmplProjDAO {
 
         EmplProj emplProj = null;
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employeeId);
             preparedStatement.setLong(2, projectId);
@@ -89,12 +89,12 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setLong(1 , newEmplProj.getEmployeeId());
-            preparedStatement.setLong(2 , newEmplProj.getProjectId());
-            preparedStatement.setLong(3 , oldEmplProj.getEmployeeId());
-            preparedStatement.setLong(4 , oldEmplProj.getProjectId());
+            preparedStatement.setLong(1, newEmplProj.getEmployeeId());
+            preparedStatement.setLong(2, newEmplProj.getProjectId());
+            preparedStatement.setLong(3, oldEmplProj.getEmployeeId());
+            preparedStatement.setLong(4, oldEmplProj.getProjectId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -109,7 +109,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());

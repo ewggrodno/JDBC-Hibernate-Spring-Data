@@ -21,7 +21,7 @@ public class EmployeeService implements EmployeeDAO {
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employee.getId());
             preparedStatement.setString(2, employee.getFirstNme());
@@ -42,7 +42,7 @@ public class EmployeeService implements EmployeeDAO {
 
         List<Employee> employeeList = new ArrayList<>();
         try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()){
+             Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -71,7 +71,7 @@ public class EmployeeService implements EmployeeDAO {
 
         Employee employee = new Employee();
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -95,7 +95,7 @@ public class EmployeeService implements EmployeeDAO {
                 FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID, ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, employee.getFirstNme());
             preparedStatement.setString(2, employee.getLastName());
@@ -114,7 +114,7 @@ public class EmployeeService implements EmployeeDAO {
         String sql = String.format("DELETE FROM employee WHERE %s=?", ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employee.getId());
 

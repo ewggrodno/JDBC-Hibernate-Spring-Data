@@ -1,6 +1,5 @@
 package bl;
 
-
 import java.sql.*;
 
 public class Util {
@@ -28,7 +27,7 @@ public class Util {
     }
 
     public static void clearAllTables() {
-        try (Connection connection = Util.getConnection()){
+        try (Connection connection = Util.getConnection()) {
             System.out.println("Start clearing Database");
             clearTable(connection, "empl_proj");
             clearTable(connection, "project");
@@ -49,5 +48,4 @@ public class Util {
         preparedStatement.close();
         System.out.printf("Clear table: %s - OK!\n", nameTable);
     }
-
 }

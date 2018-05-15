@@ -20,7 +20,7 @@ public class ProjectService implements ProjectDAO {
                 ID, TITLE);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, project.getId());
             preparedStatement.setString(2, project.getTitle());
@@ -39,7 +39,7 @@ public class ProjectService implements ProjectDAO {
 
         List<Project> projectList = new ArrayList<>();
         try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()){
+             Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -64,7 +64,7 @@ public class ProjectService implements ProjectDAO {
 
         Project project = null;
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,7 +85,7 @@ public class ProjectService implements ProjectDAO {
                 TITLE, ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqj)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sqj)) {
 
             preparedStatement.setString(1, project.getTitle());
             preparedStatement.setLong(2, project.getId());
@@ -101,7 +101,7 @@ public class ProjectService implements ProjectDAO {
         String sql = String.format("DELETE FROM project WHERE %s=?", ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, project.getId());
 

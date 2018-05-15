@@ -46,7 +46,7 @@ public class AddressService implements AddressDAO {
 
         List<Address> addressList = new ArrayList<>();
         try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()){
+             Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -75,7 +75,7 @@ public class AddressService implements AddressDAO {
 
         Address address = new Address();
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -99,7 +99,7 @@ public class AddressService implements AddressDAO {
                 COUNTRY, CITY, STREET, POST_CODE, ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, address.getCountry());
             preparedStatement.setString(2, address.getCity());
@@ -120,7 +120,7 @@ public class AddressService implements AddressDAO {
                 ID);
 
         try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, address.getId());
 
