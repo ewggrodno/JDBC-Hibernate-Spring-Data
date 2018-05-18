@@ -11,6 +11,8 @@ import java.util.Map;
 
 public class AddressService implements AddressDAO {
 
+    private static Connection connection = Util.getConnection();
+
     private static final String ID = "id";
     private static final String COUNTRY = "country";
     private static final String CITY = "city";
@@ -23,8 +25,7 @@ public class AddressService implements AddressDAO {
                 "INSERT INTO address (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, address.getId());
             preparedStatement.setString(2, address.getCountry());
@@ -45,8 +46,7 @@ public class AddressService implements AddressDAO {
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         List<Address> addressList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -74,8 +74,7 @@ public class AddressService implements AddressDAO {
                 ID, COUNTRY, CITY, STREET, POST_CODE);
 
         Address address = new Address();
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -98,8 +97,7 @@ public class AddressService implements AddressDAO {
                 "UPDATE address SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 COUNTRY, CITY, STREET, POST_CODE, ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, address.getCountry());
             preparedStatement.setString(2, address.getCity());
@@ -119,8 +117,7 @@ public class AddressService implements AddressDAO {
                 "DELETE FROM address WHERE %s=?",
                 ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, address.getId());
 

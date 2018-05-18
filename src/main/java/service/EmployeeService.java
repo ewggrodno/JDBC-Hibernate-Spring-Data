@@ -9,6 +9,8 @@ import java.util.*;
 
 public class EmployeeService implements EmployeeDAO {
 
+    private static Connection connection = Util.getConnection();
+
     private String ID = "id";
     private String FIRST_NAME = "first_name";
     private String LAST_NAME = "last_name";
@@ -22,8 +24,7 @@ public class EmployeeService implements EmployeeDAO {
         String sql = String.format("INSERT INTO employee (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employee.getId());
             preparedStatement.setString(2, employee.getFirstNme());
@@ -43,8 +44,7 @@ public class EmployeeService implements EmployeeDAO {
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         List<Employee> employeeList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -72,8 +72,7 @@ public class EmployeeService implements EmployeeDAO {
                 ID, FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID);
 
         Employee employee = new Employee();
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -96,8 +95,7 @@ public class EmployeeService implements EmployeeDAO {
                 "UPDATE employee SET %s=?, %s=?, %s=?, %s=? WHERE %s=?",
                 FIRST_NAME, LAST_NAME, BIRTHDAY, ADDRESS_ID, ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setString(1, employee.getFirstNme());
             preparedStatement.setString(2, employee.getLastName());
@@ -115,8 +113,7 @@ public class EmployeeService implements EmployeeDAO {
     public void remove(Employee employee) {
         String sql = String.format("DELETE FROM employee WHERE %s=?", ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employee.getId());
 

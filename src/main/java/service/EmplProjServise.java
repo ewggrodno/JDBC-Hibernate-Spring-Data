@@ -12,6 +12,8 @@ import java.util.List;
 
 public class EmplProjServise implements EmplProjDAO {
 
+    private static Connection connection = Util.getConnection();
+
     private String EMPLOYEE_ID = "employee_id";
     private String PROJECT_ID = "project_id";
 
@@ -21,8 +23,7 @@ public class EmplProjServise implements EmplProjDAO {
                 "INSERT INTO empl_proj (%s, %s) VALUES(?, ?)",
                 EMPLOYEE_ID, PROJECT_ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());
@@ -49,8 +50,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID);
 
         List<EmplProj> emplProjList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -75,8 +75,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, employee.getId());
 
         List<EmplProj> emplProjList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -102,8 +101,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID, PROJECT_ID, project.getId());
 
         List<EmplProj> emplProjList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -129,8 +127,7 @@ public class EmplProjServise implements EmplProjDAO {
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
         EmplProj emplProj = null;
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employeeId);
             preparedStatement.setLong(2, projectId);
@@ -153,8 +150,7 @@ public class EmplProjServise implements EmplProjDAO {
                 "UPDATE empl_proj SET %s=?, %s=? WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, PROJECT_ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, newEmplProj.getEmployeeId());
             preparedStatement.setLong(2, newEmplProj.getProjectId());
@@ -173,8 +169,7 @@ public class EmplProjServise implements EmplProjDAO {
                 "DELETE FROM empl_proj WHERE %s=? AND %s=?",
                 EMPLOYEE_ID, PROJECT_ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, emplProj.getEmployeeId());
             preparedStatement.setLong(2, emplProj.getProjectId());

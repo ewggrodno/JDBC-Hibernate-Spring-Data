@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ProjectService implements ProjectDAO {
 
+    private static Connection connection = Util.getConnection();
+
     private static final String ID = "id";
     private static final String TITLE = "title";
 
@@ -21,8 +23,7 @@ public class ProjectService implements ProjectDAO {
                 "INSERT INTO project (%s, %s) VALUES(?, ?)",
                 ID, TITLE);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, project.getId());
             preparedStatement.setString(2, project.getTitle());
@@ -45,8 +46,7 @@ public class ProjectService implements ProjectDAO {
                 ID, TITLE);
 
         List<Project> projectList = new ArrayList<>();
-        try (Connection connection = Util.getConnection();
-             Statement statement = connection.createStatement()) {
+        try (Statement statement = connection.createStatement()) {
 
             ResultSet resultSet = statement.executeQuery(sql);
 
@@ -83,8 +83,7 @@ public class ProjectService implements ProjectDAO {
                 ID, TITLE);
 
         Project project = null;
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setLong(1, id);
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -114,8 +113,7 @@ public class ProjectService implements ProjectDAO {
         String sqj = String.format("UPDATE project SET %s=? WHERE %s=?",
                 TITLE, ID);
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sqj)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sqj)) {
 
             preparedStatement.setString(1, project.getTitle());
             preparedStatement.setLong(2, project.getId());
@@ -136,8 +134,7 @@ public class ProjectService implements ProjectDAO {
             emplProjServise.remove(emplProj);
         }
 
-        try (Connection connection = Util.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, project.getId());
 
