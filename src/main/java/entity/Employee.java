@@ -16,7 +16,7 @@ public class Employee {
     private String firstNme;
     private String lastName;
     private Date birthday;
-    private long addressId;
+    private Address address;
 
     @Override
     public boolean equals(Object o) {
@@ -24,10 +24,15 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return id == employee.id &&
-                addressId == employee.addressId &&
                 Objects.equals(firstNme, employee.firstNme) &&
                 Objects.equals(lastName, employee.lastName) &&
-                Objects.equals(birthday.toString(), employee.birthday.toString());
+                Objects.equals(birthday.toString(), employee.birthday.toString()) &&
+                Objects.equals(address, employee.address);
     }
 
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, firstNme, lastName, birthday.toString(), address);
+    }
 }

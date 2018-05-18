@@ -15,6 +15,8 @@ public class EmployeeService implements EmployeeDAO {
     private String BIRTHDAY = "birthday";
     private String ADDRESS_ID = "address_id";
 
+    private AddressService addressService = new AddressService();
+
     @Override
     public void add(Employee employee) {
         String sql = String.format("INSERT INTO employee (%s, %s, %s, %s, %s) VALUES(?, ?, ?, ?, ?)",
@@ -27,7 +29,7 @@ public class EmployeeService implements EmployeeDAO {
             preparedStatement.setString(2, employee.getFirstNme());
             preparedStatement.setString(3, employee.getLastName());
             preparedStatement.setDate(4, employee.getBirthday());
-            preparedStatement.setLong(5, employee.getAddressId());
+            preparedStatement.setLong(5, employee.getAddress().getId());
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -53,7 +55,7 @@ public class EmployeeService implements EmployeeDAO {
                 employee.setFirstNme(resultSet.getString(FIRST_NAME));
                 employee.setLastName(resultSet.getString(LAST_NAME));
                 employee.setBirthday(resultSet.getDate(BIRTHDAY));
-                employee.setAddressId(resultSet.getLong(ADDRESS_ID));
+                employee.setAddress(addressService.getById(resultSet.getLong(ADDRESS_ID)));
 
                 employeeList.add(employee);
             }
@@ -81,7 +83,7 @@ public class EmployeeService implements EmployeeDAO {
             employee.setFirstNme(resultSet.getString(FIRST_NAME));
             employee.setLastName(resultSet.getString(LAST_NAME));
             employee.setBirthday(resultSet.getDate(BIRTHDAY));
-            employee.setAddressId(resultSet.getLong(ADDRESS_ID));
+            employee.setAddress(addressService.getById(resultSet.getLong(ADDRESS_ID)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -100,7 +102,7 @@ public class EmployeeService implements EmployeeDAO {
             preparedStatement.setString(1, employee.getFirstNme());
             preparedStatement.setString(2, employee.getLastName());
             preparedStatement.setDate(3, employee.getBirthday());
-            preparedStatement.setLong(4, employee.getAddressId());
+            preparedStatement.setLong(4, employee.getAddress().getId());
             preparedStatement.setLong(5, employee.getId());
 
             preparedStatement.executeUpdate();

@@ -1,28 +1,46 @@
 package service;
 
 import bl.Util;
+import entity.Employee;
 import entity.Project;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import testData.AddressData;
+import testData.EmplProjData;
+import testData.EmployeeData;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
+import static testData.AddressData.*;
+import static testData.EmployeeData.*;
 import static testData.ProjectData.*;
 
 public class ProjectServiceTest {
 
+    private AddressService addressService = new AddressService();
+    private EmployeeService employeeService = new EmployeeService();
+    private EmplProjServise emplProjServise = new EmplProjServise();
     private ProjectService projectService = new ProjectService();
 
     @Before
     public void setUp() throws Exception {
         Util.clearAllTables();
 
+        addressService.add(ADDRESS_1);
+        addressService.add(ADDRESS_2);
+        addressService.add(ADDRESS_3);
+
+        employeeService.add(EmployeeData.EMPLOYEE_1);
+        employeeService.add(EmployeeData.EMPLOYEE_2);
+        employeeService.add(EmployeeData.EMPLOYEE_3);
+
         projectService.add(PROJECT_1);
         projectService.add(PROJECT_2);
         projectService.add(PROJECT_3);
+
     }
 
     @After
@@ -32,11 +50,6 @@ public class ProjectServiceTest {
 
     @Test
     public void add_PROJECT() {
-        Util.clearAllTables();
-
-        projectService.add(PROJECT_1);
-        projectService.add(PROJECT_2);
-        projectService.add(PROJECT_3);
 
         List<Project> expected = new ArrayList<>();
         expected.add(PROJECT_1);
@@ -73,9 +86,9 @@ public class ProjectServiceTest {
 
     @Test
     public void update_PROJECT() {
-        Project project1 = new Project(1, "updateTitle 1");
-        Project project2 = new Project(2, "updateTitle 2");
-        Project project3 = new Project(3, "updateTitle 3");
+        Project project1 = new Project(1, "updateTitle 1", SET_EMPLOYEE_COUNT_1);
+        Project project2 = new Project(2, "updateTitle 2", SET_EMPLOYEE_COUNT_1);
+        Project project3 = new Project(3, "updateTitle 3", SET_EMPLOYEE_COUNT_2);
 
         projectService.update(project1);
         projectService.update(project2);

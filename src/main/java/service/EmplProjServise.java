@@ -3,6 +3,8 @@ package service;
 import bl.Util;
 import dao.EmplProjDAO;
 import entity.EmplProj;
+import entity.Employee;
+import entity.Project;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -32,6 +34,15 @@ public class EmplProjServise implements EmplProjDAO {
     }
 
     @Override
+    public void addAll(Project project) {
+        if (project.getEmployees().size() > 0) {
+            for (Employee employee : project.getEmployees()) {
+                add(new EmplProj(employee.getId(), project.getId()));
+            }
+        }
+    }
+
+    @Override
     public List<EmplProj> getAll() {
         String sql = String.format(
                 "SELECT %s, %s FROM empl_proj",
@@ -51,6 +62,60 @@ public class EmplProjServise implements EmplProjDAO {
 
                 emplProjList.add(emplProj);
             }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emplProjList;
+    }
+
+    @Override
+    public List<EmplProj> getAll(Employee employee) {
+        String sql = String.format(
+                "SELECT %s, %s FROM empl_proj WHERE %s=%d",
+                EMPLOYEE_ID, PROJECT_ID, EMPLOYEE_ID, employee.getId());
+
+        List<EmplProj> emplProjList = new ArrayList<>();
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                EmplProj emplProj = new EmplProj();
+
+                emplProj.setEmployeeId(employee.getId());
+                emplProj.setProjectId(resultSet.getLong(PROJECT_ID));
+
+                emplProjList.add(emplProj);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return emplProjList;
+    }
+
+    @Override
+    public List<EmplProj> getAll(Project project) {
+        String sql = String.format(
+                "SELECT %s, %s FROM empl_proj WHERE %s=%d",
+                EMPLOYEE_ID, PROJECT_ID, PROJECT_ID, project.getId());
+
+        List<EmplProj> emplProjList = new ArrayList<>();
+        try (Connection connection = Util.getConnection();
+             Statement statement = connection.createStatement()) {
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            while (resultSet.next()) {
+                EmplProj emplProj = new EmplProj();
+
+                emplProj.setEmployeeId(resultSet.getLong(EMPLOYEE_ID));
+                emplProj.setProjectId(project.getId());
+
+                emplProjList.add(emplProj);
+            }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

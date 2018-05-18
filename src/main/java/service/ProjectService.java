@@ -2,6 +2,8 @@ package service;
 
 import bl.Util;
 import dao.ProjectDAO;
+import entity.EmplProj;
+import entity.Employee;
 import entity.Project;
 
 import java.sql.*;
@@ -29,6 +31,11 @@ public class ProjectService implements ProjectDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        if (project.getEmployees().size() > 0) {
+            EmplProjServise emplProjServise = new EmplProjServise();
+            emplProjServise.addAll(project);
+        }
     }
 
     @Override
@@ -54,6 +61,19 @@ public class ProjectService implements ProjectDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        for (Project project : projectList) {
+
+            EmplProjServise emplProjServise = new EmplProjServise();
+            List<EmplProj> emplProjList = emplProjServise.getAll(project);
+
+            for (EmplProj emplProj : emplProjList) {
+                EmployeeService employeeService = new EmployeeService();
+                Employee employee = employeeService.getById(emplProj.getEmployeeId());
+                project.getEmployees().add(employee);
+            }
+        }
+
         return projectList;
     }
 
@@ -76,6 +96,16 @@ public class ProjectService implements ProjectDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        EmplProjServise emplProjServise = new EmplProjServise();
+        List<EmplProj> emplProjList = emplProjServise.getAll(project);
+
+        for (EmplProj emplProj : emplProjList) {
+            EmployeeService employeeService = new EmployeeService();
+            Employee employee = employeeService.getById(emplProj.getEmployeeId());
+            project.getEmployees().add(employee);
+        }
+
         return project;
     }
 
@@ -99,6 +129,12 @@ public class ProjectService implements ProjectDAO {
     @Override
     public void remove(Project project) {
         String sql = String.format("DELETE FROM project WHERE %s=?", ID);
+
+        EmplProjServise emplProjServise = new EmplProjServise();
+        List<EmplProj> emplProjList = emplProjServise.getAll(project);
+        for (EmplProj emplProj : emplProjList) {
+            emplProjServise.remove(emplProj);
+        }
 
         try (Connection connection = Util.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {

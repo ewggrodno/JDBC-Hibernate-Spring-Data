@@ -26,6 +26,9 @@ public class EmployeeServiceTest {
         addressService.add(ADDRESS_1);
         addressService.add(ADDRESS_2);
         addressService.add(ADDRESS_3);
+        addressService.add(UPDATE_ADDRESS_4);
+        addressService.add(UPDATE_ADDRESS_5);
+        addressService.add(UPDATE_ADDRESS_6);
 
         employeeService.add(EMPLOYEE_1);
         employeeService.add(EMPLOYEE_2);
@@ -44,6 +47,9 @@ public class EmployeeServiceTest {
         addressService.add(ADDRESS_1);
         addressService.add(ADDRESS_2);
         addressService.add(ADDRESS_3);
+        addressService.add(UPDATE_ADDRESS_4);
+        addressService.add(UPDATE_ADDRESS_5);
+        addressService.add(UPDATE_ADDRESS_6);
 
         employeeService.add(EMPLOYEE_1);
         employeeService.add(EMPLOYEE_2);
@@ -84,11 +90,11 @@ public class EmployeeServiceTest {
     @Test
     public void update_EMPLOYEE() {
         Employee employee1 = new Employee(
-                1, "updatefirstName 1", "updatelastName 1", new Date(5000 + 500), 1);
+                1, "updatefirstName 1", "updatelastName 1", new Date(5000 + 500), ADDRESS_1);
         Employee employee2 = new Employee(
-                2, "updatefirstName 2", "updatelastName 3", new Date(10000 + 500), 3);
+                2, "updatefirstName 2", "updatelastName 3", new Date(10000 + 500), ADDRESS_2);
         Employee employee3 = new Employee(
-                3, "updatefirstName 3", "updatelastName 3", new Date(20000 + 500), 2);
+                3, "updatefirstName 3", "updatelastName 3", new Date(20000 + 500), ADDRESS_3);
 
         employeeService.update(employee1);
         employeeService.update(employee2);
