@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.Project" table="PROJECT" schema="PUBLIC" catalog="MYTEST">
+
+        <id name="id" column="ID" type="java.lang.Long">
+            <generator class="identity"/>
+        </id>
+        <property name="title" column="TITLE" type="java.lang.String" not-null="true"/>
+        <set name="employees" table="EMPL_PROJ"
+             inverse="false" lazy="true" fetch="select" cascade="all">
+            <key>
+                <column name="PROJECT_ID" not-null="true"/>
+            </key>
+            <many-to-many entity-name="entity.Employee">
+                <column name="EMPLOYEE_ID" not-null="true"/>
+            </many-to-many>
+        </set>
+
+    </class>
+</hibernate-mapping>

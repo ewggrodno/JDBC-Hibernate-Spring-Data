@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="entity.Address" table="ADDRESS" schema="PUBLIC" catalog="MYTEST">
+        <id name="id" column="ID" type="java.lang.Long">
+            <generator class="identity"/>
+        </id>
+        <property name="country" column="COUNTRY" length="255" not-null="true"/>
+        <property name="city" column="CITY" length="255" not-null="true"/>
+        <property name="street" column="STREET" length="255" not-null="true"/>
+        <property name="postCode" column="POST_CODE" length="255" not-null="true"/>
+    </class>
+</hibernate-mapping>

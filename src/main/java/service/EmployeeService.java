@@ -27,7 +27,7 @@ public class EmployeeService implements EmployeeDAO {
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
             preparedStatement.setLong(1, employee.getId());
-            preparedStatement.setString(2, employee.getFirstNme());
+            preparedStatement.setString(2, employee.getFirstName());
             preparedStatement.setString(3, employee.getLastName());
             preparedStatement.setDate(4, employee.getBirthday());
             preparedStatement.setLong(5, employee.getAddress().getId());
@@ -52,7 +52,7 @@ public class EmployeeService implements EmployeeDAO {
                 Employee employee = new Employee();
 
                 employee.setId(resultSet.getLong(ID));
-                employee.setFirstNme(resultSet.getString(FIRST_NAME));
+                employee.setFirstName(resultSet.getString(FIRST_NAME));
                 employee.setLastName(resultSet.getString(LAST_NAME));
                 employee.setBirthday(resultSet.getDate(BIRTHDAY));
                 employee.setAddress(addressService.getById(resultSet.getLong(ADDRESS_ID)));
@@ -79,7 +79,7 @@ public class EmployeeService implements EmployeeDAO {
             resultSet.next();
 
             employee.setId(resultSet.getLong(ID));
-            employee.setFirstNme(resultSet.getString(FIRST_NAME));
+            employee.setFirstName(resultSet.getString(FIRST_NAME));
             employee.setLastName(resultSet.getString(LAST_NAME));
             employee.setBirthday(resultSet.getDate(BIRTHDAY));
             employee.setAddress(addressService.getById(resultSet.getLong(ADDRESS_ID)));
@@ -97,7 +97,7 @@ public class EmployeeService implements EmployeeDAO {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
 
-            preparedStatement.setString(1, employee.getFirstNme());
+            preparedStatement.setString(1, employee.getFirstName());
             preparedStatement.setString(2, employee.getLastName());
             preparedStatement.setDate(3, employee.getBirthday());
             preparedStatement.setLong(4, employee.getAddress().getId());

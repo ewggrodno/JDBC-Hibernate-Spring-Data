@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +15,11 @@ import java.util.Objects;
 public class Employee {
 
     private long id;
-    private String firstNme;
+    private String firstName;
     private String lastName;
     private Date birthday;
     private Address address;
+    private Set<Project> projects = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -24,7 +27,7 @@ public class Employee {
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
         return id == employee.id &&
-                Objects.equals(firstNme, employee.firstNme) &&
+                Objects.equals(firstName, employee.firstName) &&
                 Objects.equals(lastName, employee.lastName) &&
                 Objects.equals(birthday.toString(), employee.birthday.toString()) &&
                 Objects.equals(address, employee.address);
@@ -33,6 +36,6 @@ public class Employee {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, firstNme, lastName, birthday.toString(), address);
+        return Objects.hash(id, firstName, lastName, birthday.toString(), address);
     }
 }
