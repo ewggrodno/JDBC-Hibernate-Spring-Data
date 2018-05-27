@@ -4,13 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="entity.Employee" table="EMPLOYEE" schema="PUBLIC" catalog="MYTEST">
+    <class name="entity.Employee" table="EMPLOYEE">
 
         <id name="id" column="ID" type="java.lang.Long">
             <generator class="identity"/>
         </id>
-        <property name="firstName" column="FIRST_NAME" type="java.lang.String" not-null="true"/>
-        <property name="lastName" column="LAST_NAME" type="java.lang.String" not-null="true"/>
+        <property name="firstName" column="FIRST_NAME" not-null="true"/>
+        <property name="lastName" column="LAST_NAME" not-null="true"/>
         <property name="birthday" column="BIRTHDAY" type="java.util.Date" not-null="true"/>
         <many-to-one name="address" column="ADDRESS_ID" class="entity.Address" not-null="true" cascade="all"/>
         <set name="projects" table="EMPL_PROJ" fetch="select" cascade="all">
