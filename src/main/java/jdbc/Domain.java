@@ -1,4 +1,6 @@
-import bl.Util;
+package jdbc;
+
+import jdbc.bl.Util;
 
 public class Domain {
 

@@ -1,7 +1,8 @@
 package service;
 
-import bl.Util;
+import jdbc.bl.Util;
 import entity.Address;
+import jdbc.service.AddressService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

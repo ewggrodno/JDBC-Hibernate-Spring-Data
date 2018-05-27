@@ -1,6 +1,6 @@
-package servise_hibernate;
+package hibernate.service;
 
-import bl.HibernateSessionUtil;
+import hibernate.bl.HibernateSessionUtil;
 import dao.EmployeeDAO;
 import entity.Employee;
 import org.hibernate.query.Query;

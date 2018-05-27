@@ -1,4 +1,4 @@
-package bl;
+package hibernate.bl;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

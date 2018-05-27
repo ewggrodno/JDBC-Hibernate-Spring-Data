@@ -1,4 +1,6 @@
-import bl.HibernateUtil;
+package hibernate;
+
+import hibernate.bl.HibernateUtil;
 import entity.Address;
 import entity.Employee;
 import entity.Project;

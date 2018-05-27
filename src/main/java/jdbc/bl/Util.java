@@ -1,4 +1,4 @@
-package bl;
+package jdbc.bl;
 
 import java.sql.*;
 

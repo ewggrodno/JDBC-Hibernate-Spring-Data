@@ -1,13 +1,14 @@
 package service;
 
-import bl.Util;
-import entity.Employee;
+import jdbc.bl.Util;
 import entity.Project;
+import jdbc.service.AddressService;
+import jdbc.service.EmplProjServise;
+import jdbc.service.EmployeeService;
+import jdbc.service.ProjectService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import testData.AddressData;
-import testData.EmplProjData;
 import testData.EmployeeData;
 
 import java.util.ArrayList;

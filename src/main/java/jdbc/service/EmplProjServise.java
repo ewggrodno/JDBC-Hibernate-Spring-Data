@@ -1,6 +1,6 @@
-package service;
+package jdbc.service;
 
-import bl.Util;
+import jdbc.bl.Util;
 import dao.EmplProjDAO;
 import entity.EmplProj;
 import entity.Employee;

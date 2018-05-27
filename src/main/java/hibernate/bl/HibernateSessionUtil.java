@@ -1,4 +1,4 @@
-package bl;
+package hibernate.bl;
 
 import lombok.Getter;
 import org.hibernate.Session;

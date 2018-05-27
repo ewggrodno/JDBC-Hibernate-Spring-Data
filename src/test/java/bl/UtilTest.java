@@ -1,12 +1,13 @@
 package bl;
 
+import jdbc.bl.Util;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import service.AddressService;
-import service.EmplProjServise;
-import service.EmployeeService;
-import service.ProjectService;
+import jdbc.service.AddressService;
+import jdbc.service.EmplProjServise;
+import jdbc.service.EmployeeService;
+import jdbc.service.ProjectService;
 
 import static org.junit.Assert.*;
 import static testData.AddressData.*;
